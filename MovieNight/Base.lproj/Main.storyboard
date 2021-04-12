@@ -151,6 +151,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h8L-Gm-Prf"/>
+                    <connections>
+                        <outlet property="myTableView" destination="Rlj-BL-LCJ" id="P9d-zn-DXI"/>
+                        <outlet property="searchBar" destination="t1t-N1-Mvf" id="zXu-vi-X6c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUH-GU-DuM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DC51AA92624EE3100BC6583 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC51AA82624EE3100BC6583 /* Result.swift */; };
 		CDB3F5952624DCC500286D9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F5942624DCC500286D9E /* AppDelegate.swift */; };
 		CDB3F5972624DCC500286D9E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F5962624DCC500286D9E /* SceneDelegate.swift */; };
 		CDB3F59C2624DCC500286D9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB3F59A2624DCC500286D9E /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5DC51AA82624EE3100BC6583 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		CDB3F5912624DCC500286D9E /* MovieNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB3F5942624DCC500286D9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDB3F5962624DCC500286D9E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				CDB3F5A22624DCC500286D9E /* LaunchScreen.storyboard */,
 				CDB3F5A52624DCC500286D9E /* Info.plist */,
 				CDB3F59D2624DCC500286D9E /* MovieNight.xcdatamodeld */,
+				5DC51AA82624EE3100BC6583 /* Result.swift */,
 			);
 			path = MovieNight;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				CDB3F5972624DCC500286D9E /* SceneDelegate.swift in Sources */,
 				CDB3F5B42624E57A00286D9E /* WatchListViewController.swift in Sources */,
 				CDB3F5B72624E58F00286D9E /* FavouritesViewController.swift in Sources */,
+				5DC51AA92624EE3100BC6583 /* Result.swift in Sources */,
 				CDB3F5AE2624E2AF00286D9E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
