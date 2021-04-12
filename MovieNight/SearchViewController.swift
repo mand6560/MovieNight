@@ -24,6 +24,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myTableView.delegate = self
+        myTableView.dataSource = self
         self.title = "Search"
         mediaList.append(resultTemp)
         
@@ -48,6 +50,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell! //MARK: Change Later
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
