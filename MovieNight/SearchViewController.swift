@@ -68,7 +68,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let data = try Data(contentsOf: url)
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any] {
-                    let response = object["Response"] as! String
+                    //let response = object["Response"] as! String
                     let searchResultsObject = object["Search"] as! Array<Any>
                     //print(response)
                     //print(search)
