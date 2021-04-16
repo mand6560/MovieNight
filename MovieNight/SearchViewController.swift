@@ -10,13 +10,13 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
     
     // MARK: - Global Variable
-    private final var apiKey = "638c2b56"
-    var urlString = "http://www.omdbapi.com/?s="
+    var urlString = "https://www.omdbapi.com/?apikey=638c2b56&s="
     
     var resultTemp = Result(title: "Spongebob Squarepants", year: "1999", imdbID: "1f4tgg", mediaType: "series", poster: UIImage(systemName: "doc")!)
     var mediaList = [Result]()
     
     var cellIdentifier = "search-cell"
+    var dataStore = NSData()
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         myTableView.delegate = self
         myTableView.dataSource = self
+        searchBar.delegate = self
         self.title = "Search"
         mediaList.append(resultTemp)
         
@@ -56,6 +57,35 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
+        fetchSearchResults(searchQuery: searchBar.text!)
+    }
+    
+    func fetchSearchResults(searchQuery: String) {
+//        var temp = searchQuery
+        print(urlString + searchQuery)
+        let searchQuery = searchQuery.replacingOccurrences(of: " ", with: "+")
+        let url: NSURL = NSURL(string: urlString + searchQuery)!
+        let request: URLRequest=URLRequest(url: url as URL)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        var result: NSString
+        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
+//            print("WORKING")
+            self.dataStore = data! as NSData
+            result = NSString(data: self.dataStore as Data, encoding: String.Encoding.utf8.rawValue)!
+//            print(" the JSON file content is ")
+//            print(results!)
+//            print(response!)
+//            print("")
+//            self.parseXML()
+        })
+        task.resume()
+        let resultsString: String = result as String
+        let jsonData = resultsString.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        var resultDict = [[String:String]]()
+        let movie = try decoder.decode(resultDict,from: jsonData)
+        print(jsonData)
     }
 
     /*
