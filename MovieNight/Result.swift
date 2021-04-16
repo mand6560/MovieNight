@@ -15,7 +15,7 @@ class Result {
     private let mediaType: String
     private var poster: UIImage?
     
-    init(title: String, year: String, imdbID: String, mediaType: String, poster: UIImage){
+    init(title: String, year: String, imdbID: String, mediaType: String, poster: UIImage?){
         self.title = title
         self.year = year
         self.imdbID = imdbID

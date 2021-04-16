@@ -11,8 +11,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Global Variable
     var urlString = "https://www.omdbapi.com/?apikey=638c2b56&s="
-    
-    var resultTemp = Result(title: "Spongebob Squarepants", year: "1999", imdbID: "1f4tgg", mediaType: "series", poster: UIImage(systemName: "doc")!)
     var mediaList = [Result]()
     
     var cellIdentifier = "search-cell"
@@ -28,7 +26,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTableView.dataSource = self
         searchBar.delegate = self
         self.title = "Search"
-        mediaList.append(resultTemp)
         
     }
     
@@ -45,6 +42,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if let img = mediaList[indexPath.row].getPoster(){
             cell?.imageView?.image = img
+        } else {
+            cell?.imageView?.image = UIImage(systemName: "Search")
         }
         cell?.textLabel?.text = mediaList[indexPath.row].getTitle()
         
@@ -61,31 +60,34 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func fetchSearchResults(searchQuery: String) {
-//        var temp = searchQuery
-        print(urlString + searchQuery)
-        let searchQuery = searchQuery.replacingOccurrences(of: " ", with: "+")
-        let url: NSURL = NSURL(string: urlString + searchQuery)!
-        let request: URLRequest=URLRequest(url: url as URL)
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        var result: NSString
-        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
-//            print("WORKING")
-            self.dataStore = data! as NSData
-            result = NSString(data: self.dataStore as Data, encoding: String.Encoding.utf8.rawValue)!
-//            print(" the JSON file content is ")
-//            print(results!)
-//            print(response!)
-//            print("")
-//            self.parseXML()
-        })
-        task.resume()
-        let resultsString: String = result as String
-        let jsonData = resultsString.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        var resultDict = [[String:String]]()
-        let movie = try decoder.decode(resultDict,from: jsonData)
-        print(jsonData)
+        do {
+            let searchQuery = searchQuery.replacingOccurrences(of: " ", with: "+")
+            if let url = URL(string: urlString + searchQuery) {
+                //print(url)
+                let data = try Data(contentsOf: url)
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let object = json as? [String: Any] {
+                    let response = object["Response"] as! String
+                    let searchResultsObject = object["Search"] as! Array<Any>
+                    //print(response)
+                    //print(search)
+                    for resultObject in searchResultsObject {
+                        if let result = resultObject as? [String: Any] {
+                            let newResult = Result(title: result["Title"] as! String, year: result["Year"] as! String, imdbID: result["imdbID"] as! String, mediaType: result["Type"] as! String, poster: nil)
+                            mediaList.append(newResult)
+                        }
+                    }
+                } else {
+                print("JSON is invalid")
+                }
+            } else {
+                fatalError()
+            }
+        } catch {
+            fatalError()
+        }
+        
+        myTableView.reloadData()
     }
 
     /*
