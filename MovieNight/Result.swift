@@ -42,7 +42,7 @@ class Result {
         return self.poster
     }
     
-    func setPoster(img:UIImage){
+    func setPoster(img:UIImage?){
         self.poster = img
     }
     

@@ -56,6 +56,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
+        mediaList.removeAll()
         fetchSearchResults(searchQuery: searchBar.text!)
     }
     
@@ -74,6 +75,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     for resultObject in searchResultsObject {
                         if let result = resultObject as? [String: Any] {
                             let newResult = Result(title: result["Title"] as! String, year: result["Year"] as! String, imdbID: result["imdbID"] as! String, mediaType: result["Type"] as! String, poster: nil)
+                            
+                            let imageURLString = result["Poster"] as! String
+                            var posterImage: UIImage?
+                            
+                            if (imageURLString == "N/A") {
+                                posterImage = UIImage(systemName: "photo")
+                            } else {
+                                let imageURL = URL(string: result["Poster"] as! String)!
+                                let imageData = try Data(contentsOf: imageURL)
+                                posterImage = UIImage(data: imageData)
+                            }
+                            
+                            newResult.setPoster(img: posterImage)
                             mediaList.append(newResult)
                         }
                     }
@@ -86,7 +100,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch {
             fatalError()
         }
-        
         myTableView.reloadData()
     }
 
