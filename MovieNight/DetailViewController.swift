@@ -53,6 +53,10 @@ class DetailViewController: UIViewController {
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
         // watchlist = Watchlist(context: context)
+        if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
+            watchlistButton.setTitle("Wishlisted", for: .normal)
+            watchlistButton.isEnabled = false
+        }
         
         getMovieData()
 
@@ -106,7 +110,13 @@ class DetailViewController: UIViewController {
     @IBAction func watchlistButtonClicked(_ sender: Any) {
         print("add to watchlist")
 //        self.movies!.set(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
-        Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
+        let temp = Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
+        if (temp == true){
+            watchlistButton.setTitle("Wishlisted", for: .normal)
+            watchlistButton.isEnabled = false
+        } else{
+            print("Already exists")
+        }
         do {
             try context.save()
             print("SAVED")
