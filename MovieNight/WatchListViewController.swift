@@ -18,6 +18,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
+    let context = AppDelegate.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Watchlist"
@@ -131,6 +133,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             watchListTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
         case .delete:
             watchListTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
+            // print("deleted!")
         default:
             break
         }
@@ -141,9 +144,34 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         case .insert:
             watchListTableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
+            let obj = fetchedResultsController.object(at: indexPath!) as! Watchlist
+            presentFavouritesAlert(obj: obj)
             watchListTableView.deleteRows(at: [indexPath!], with: .automatic)
+            print("deleted!")
         default:
             break
         }
+    }
+    
+    func presentFavouritesAlert(obj: Watchlist) {
+        let favouritesAlert = UIAlertController(title: "Add to favourites", message: "Would you like to add this movie/show to your favourites?", preferredStyle: UIAlertController.Style.alert)
+
+        favouritesAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+            print("added to favourites")
+            let result = Favourites.makeFavourites(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!)
+            print("Added to favourites: \(result)")
+            do {
+                try self.context.save()
+                print("SAVED")
+            } catch let error as NSError {
+                print("\(error)")
+            }
+        }))
+
+        favouritesAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+              print("was not added to favourites")
+        }))
+
+        present(favouritesAlert, animated: true, completion: nil)
     }
 }

@@ -54,7 +54,7 @@ class DetailViewController: UIViewController {
         movieID = currentResult!.getImdbID()
         // watchlist = Watchlist(context: context)
         if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
-            watchlistButton.setTitle("Wishlisted", for: .normal)
+            watchlistButton.setTitle("Watchlisted", for: .normal)
             watchlistButton.isEnabled = false
         }
         
@@ -112,7 +112,7 @@ class DetailViewController: UIViewController {
 //        self.movies!.set(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
         let temp = Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
         if (temp == true){
-            watchlistButton.setTitle("Wishlisted", for: .normal)
+            watchlistButton.setTitle("Watchlisted", for: .normal)
             watchlistButton.isEnabled = false
         } else{
             print("Already exists")
