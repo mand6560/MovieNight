@@ -164,7 +164,10 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         case .delete:
             let obj = anObject as! Watchlist
             let myResult = Result(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!, imdbID: obj.imdbID!)
-            presentFavouritesAlert(obj: myResult)
+            
+            if !Favourites.favouritesExists(with: obj.title!) {
+                presentFavouritesAlert(obj: myResult)
+            }
 
             watchListTableView.deleteRows(at: [indexPath!], with: .automatic)
             print("deleted!")
