@@ -23,18 +23,11 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.title = "My Watchlist"
         watchListTableView.delegate = self
         watchListTableView.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         initializeFetchedResultsController()
-//        let testimg = UIImage(systemName: "pencil")!.pngData()!
-//
-//        let context = AppDelegate.viewContext
-//        let movies = Watchlist(context: context)
-//        movies.set(actors: "David Brown", director: "Eugene Zima", poster: testimg, rated: "R", released: "May 25, 2008", runtime: "126 mins", synopsis: "Random", title: "Brown vs Zima", year: "2008")
-//
-//        do {
-//            try context.save()
-//        } catch let error as NSError {
-//            print("\(error)")
-//        }
+        watchListTableView.reloadData()
     }
     
     // MARK: - UITableView Delegate
