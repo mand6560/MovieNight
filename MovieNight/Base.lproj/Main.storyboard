@@ -97,6 +97,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EGy-fP-l77"/>
+                    <connections>
+                        <outlet property="watchListTableView" destination="Bnt-4T-MM4" id="YvN-To-9mu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inR-L4-S8O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

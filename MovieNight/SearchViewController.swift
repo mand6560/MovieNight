@@ -58,8 +58,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell! //MARK: Change Later
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Remove the highlight when row is selected
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
