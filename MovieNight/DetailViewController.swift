@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
     var ratings:     Array<Any>?
     
     let context = AppDelegate.viewContext
-    var watchlist: Watchlist?
+    // var watchlist: Watchlist?
     
     var urlString = "https://www.omdbapi.com/?apikey=638c2b56&i="
     
@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
         self.title = currentResult!.getTitle()
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
-        watchlist = Watchlist(context: context)
+        // watchlist = Watchlist(context: context)
         
         getMovieData()
 
@@ -106,7 +106,7 @@ class DetailViewController: UIViewController {
     @IBAction func watchlistButtonClicked(_ sender: Any) {
         print("add to watchlist")
 //        self.movies!.set(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
-        Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.title!, year: self.year!)
+        Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
         do {
             try context.save()
             print("SAVED")

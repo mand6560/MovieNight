@@ -53,7 +53,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "watchlist-cell")
         let obj = fetchedResultsController.object(at: indexPath) as! Watchlist
         cell?.textLabel?.text = obj.title
-        //print(obj.title!)
+        cell?.imageView?.image = UIImage(data: obj.poster!)
+        // print("Title of thing is: \(obj.title)")
         print("INSERT")
         return cell!
     }
@@ -91,12 +92,21 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             cacheName: nil)
             as? NSFetchedResultsController<NSFetchRequestResult>
         
+        do {
+            let count = try context.count(for: request)
+            print("Count is: \(count)")
+        } catch {
+            print(error.localizedDescription)
+        }
+        
         // When the database changes, the delegate will be notified.
         // We can reload the UITableView to reflect the change.
         fetchedResultsController.delegate = self
+        
         do {
             // make the fetch
             try fetchedResultsController.performFetch()
+            print()
             print("FETCH")
         } catch {
             fatalError("Failed to initialize FetchedResultsController: \(error)")

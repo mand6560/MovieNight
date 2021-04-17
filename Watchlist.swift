@@ -12,12 +12,14 @@ import CoreData
 @objc(Watchlist)
 public class Watchlist: NSManagedObject {
     
-    class func makeWatchlist(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String) {
+    class func makeWatchlist(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String) -> Bool {
         let context = AppDelegate.viewContext
         if !Watchlist.watchlistExists(with: title) {
             let watchlist = Watchlist(context: context)
             watchlist.set(actors: actors, director: director, poster: poster, rated: rated, released: released, runtime: runtime, synopsis: synopsis, title: title, year: year)
+            return true
         }
+        return false
     }
     
     class func watchlistExists(with title: String) -> Bool {
