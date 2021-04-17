@@ -153,7 +153,10 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         case .insert:
             watchListTableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
-            presentFavouritesAlert(obj: anObject as! Watchlist)
+            let obj = anObject as! Watchlist
+            let myResult = Result(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!, imdbID: obj.imdbID!)
+            presentFavouritesAlert(obj: myResult)
+
             watchListTableView.deleteRows(at: [indexPath!], with: .automatic)
             print("deleted!")
         default:
@@ -161,12 +164,12 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func presentFavouritesAlert(obj: Watchlist) {
+    func presentFavouritesAlert(obj: Result) {
         let favouritesAlert = UIAlertController(title: "Add to favourites", message: "Would you like to add this movie/show to your favourites?", preferredStyle: UIAlertController.Style.alert)
 
         favouritesAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             print("added to favourites")
-            let result = Favourites.makeFavourites(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!, imdbID: obj.imdbID!)
+            let result = Favourites.makeFavourites(actors: obj.getActor(), director: obj.getDirecter(), poster: obj.getPosterData(), rated: obj.getRated(), released: obj.getReleased(), runtime: obj.getRuntime(), synopsis: obj.getSynopsis(), title: obj.getTitle(), year: obj.getYear(), imdbID: obj.getImdbID())
             print("Added to favourites: \(result)")
             do {
                 try self.context.save()
