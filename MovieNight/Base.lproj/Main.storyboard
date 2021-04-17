@@ -53,6 +53,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y3m-0f-bso"/>
+                    <connections>
+                        <outlet property="favouriteListTableView" destination="Q7X-fT-gvI" id="Sog-JK-rJU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ScA-Bc-eOH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Favourites)
 public class Favourites: NSManagedObject {
@@ -45,6 +46,18 @@ public class Favourites: NSManagedObject {
         self.title = title
         self.year = year
         self.imdbID = imdbID
+    }
+    
+    class func getResultByTitle(title: String) -> Result?{
+        let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
+        request.predicate = NSPredicate(format: "title = %@", title)
+        let context = AppDelegate.viewContext
+        let favourites = try? context.fetch(request)
+        if (favourites?.isEmpty)! {
+            return nil
+        } else {
+            return Result(title: favourites![0].title!, year: favourites![0].year!, imdbID: favourites![0].imdbID!, mediaType: "", poster: UIImage(data: favourites![0].poster!))
+        }
     }
 
 }
