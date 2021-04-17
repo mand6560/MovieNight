@@ -21,18 +21,20 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Watchlist"
-        
-        let testimg = UIImage(systemName: "pencil")!.pngData()!
-        
-        let context = AppDelegate.viewContext
-        let movies = Watchlist(context: context)
-        movies.set(actors: "David Brown", director: "Eugene Zima", poster: testimg, rated: "R", released: "May 25, 2008", runtime: "126 mins", synopsis: "Random", title: "Brown vs Zima", year: "2008")
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("\(error)")
-        }
+        watchListTableView.delegate = self
+        watchListTableView.dataSource = self
+        initializeFetchedResultsController()
+//        let testimg = UIImage(systemName: "pencil")!.pngData()!
+//
+//        let context = AppDelegate.viewContext
+//        let movies = Watchlist(context: context)
+//        movies.set(actors: "David Brown", director: "Eugene Zima", poster: testimg, rated: "R", released: "May 25, 2008", runtime: "126 mins", synopsis: "Random", title: "Brown vs Zima", year: "2008")
+//
+//        do {
+//            try context.save()
+//        } catch let error as NSError {
+//            print("\(error)")
+//        }
     }
     
     // MARK: - UITableView Delegate
@@ -58,6 +60,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "watchlist-cell")
         let obj = fetchedResultsController.object(at: indexPath) as! Watchlist
         cell?.textLabel?.text = obj.title
+        print(obj.title!)
+        print("INSERT")
         return cell!
     }
     
@@ -100,6 +104,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         do {
             // make the fetch
             try fetchedResultsController.performFetch()
+            print("FETCH")
         } catch {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }

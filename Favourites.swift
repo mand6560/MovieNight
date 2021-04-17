@@ -1,14 +1,17 @@
 //
-//  Watchlist.swift
+//  Favourites+CoreDataClass.swift
 //  MovieNight
 //
-//  Created by Patrick Mandarino on 2021-04-16.
+//  Created by Steven Tran on 2021-04-16.
+//
 //
 
-import UIKit
+import Foundation
 import CoreData
 
-class Watchlist: NSManagedObject {
+@objc(Favourites)
+public class Favourites: NSManagedObject {
+
     func set(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String) {
         self.actors = actors
         self.director = director
@@ -20,4 +23,5 @@ class Watchlist: NSManagedObject {
         self.title = title
         self.year = year
     }
+
 }
