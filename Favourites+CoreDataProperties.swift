@@ -18,6 +18,7 @@ extension Favourites {
 
     @NSManaged public var actors: String?
     @NSManaged public var director: String?
+    @NSManaged public var imdbID: String?
     @NSManaged public var poster: Data?
     @NSManaged public var rated: String?
     @NSManaged public var released: String?

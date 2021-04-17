@@ -12,11 +12,11 @@ import CoreData
 @objc(Favourites)
 public class Favourites: NSManagedObject {
     
-    class func makeFavourites(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String) -> Bool {
+    class func makeFavourites(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) -> Bool {
         let context = AppDelegate.viewContext
         if !Favourites.favouritesExists(with: title) {
             let favourites = Favourites(context: context)
-            favourites.set(actors: actors, director: director, poster: poster, rated: rated, released: released, runtime: runtime, synopsis: synopsis, title: title, year: year)
+            favourites.set(actors: actors, director: director, poster: poster, rated: rated, released: released, runtime: runtime, synopsis: synopsis, title: title, year: year, imdbID: imdbID)
             return true
         }
         return false
@@ -34,7 +34,7 @@ public class Favourites: NSManagedObject {
         }
     }
 
-    func set(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String) {
+    func set(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) {
         self.actors = actors
         self.director = director
         self.poster = poster
@@ -44,6 +44,7 @@ public class Favourites: NSManagedObject {
         self.synopsis = synopsis
         self.title = title
         self.year = year
+        self.imdbID = imdbID
     }
 
 }

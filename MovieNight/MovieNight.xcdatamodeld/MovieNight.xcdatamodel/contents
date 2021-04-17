@@ -3,6 +3,7 @@
     <entity name="Favourites" representedClassName="Favourites" syncable="YES">
         <attribute name="actors" optional="YES" attributeType="String"/>
         <attribute name="director" optional="YES" attributeType="String"/>
+        <attribute name="imdbID" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="rated" optional="YES" attributeType="String"/>
         <attribute name="released" optional="YES" attributeType="String"/>
@@ -14,6 +15,7 @@
     <entity name="Watchlist" representedClassName="Watchlist" syncable="YES">
         <attribute name="actors" optional="YES" attributeType="String"/>
         <attribute name="director" optional="YES" attributeType="String"/>
+        <attribute name="imdbID" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="rated" optional="YES" attributeType="String"/>
         <attribute name="released" optional="YES" attributeType="String"/>
@@ -23,7 +25,7 @@
         <attribute name="year" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Favourites" positionX="-45" positionY="0" width="128" height="178"/>
-        <element name="Watchlist" positionX="-18" positionY="27" width="128" height="178"/>
+        <element name="Favourites" positionX="-45" positionY="0" width="128" height="193"/>
+        <element name="Watchlist" positionX="137.88525390625" positionY="7.057403564453125" width="128" height="193"/>
     </elements>
 </model>

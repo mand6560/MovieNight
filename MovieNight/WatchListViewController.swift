@@ -77,6 +77,15 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailVC = segue.destination as! DetailViewController
+        let selectedResultCell = sender as! UITableViewCell
+        let indexPath = watchListTableView.indexPath(for: selectedResultCell)
+        let selectedResult = fetchedResultsController.object(at: indexPath!) as! Watchlist
+        
+        detailVC.setCurrentResult(to: Watchlist.getResultByTitle(title: selectedResult.title!)!)
+    }
+    
     // MARK: - FetchedResult
     
     func initializeFetchedResultsController() {
@@ -157,7 +166,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
 
         favouritesAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             print("added to favourites")
-            let result = Favourites.makeFavourites(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!)
+            let result = Favourites.makeFavourites(actors: obj.actors!, director: obj.director!, poster: obj.poster!, rated: obj.rated!, released: obj.released!, runtime: obj.runtime!, synopsis: obj.synopsis!, title: obj.title!, year: obj.year!, imdbID: obj.imdbID!)
             print("Added to favourites: \(result)")
             do {
                 try self.context.save()

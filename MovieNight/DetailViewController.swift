@@ -40,6 +40,7 @@ class DetailViewController: UIViewController {
     var awards:      String?
     var poster:      String? // done
     var ratings:     Array<Any>?
+    var imdbID:      String?
     
     let context = AppDelegate.viewContext
     // var watchlist: Watchlist?
@@ -52,6 +53,7 @@ class DetailViewController: UIViewController {
         self.title = currentResult!.getTitle()
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
+        imdbID = movieID
         // watchlist = Watchlist(context: context)
         if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
             watchlistButton.setTitle("Watchlisted", for: .normal)
@@ -96,6 +98,7 @@ class DetailViewController: UIViewController {
                     yearLabel.text = year
                     releaseLabel.text = released
                     directorLabel.text = director
+                    
                 } else {
                     print("JSON is invalid")
                 }
@@ -110,7 +113,7 @@ class DetailViewController: UIViewController {
     @IBAction func watchlistButtonClicked(_ sender: Any) {
         print("add to watchlist")
 //        self.movies!.set(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
-        let temp = Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!)
+        let temp = Watchlist.makeWatchlist(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!, imdbID: self.imdbID!)
         if (temp == true){
             watchlistButton.setTitle("Watchlisted", for: .normal)
             watchlistButton.isEnabled = false
