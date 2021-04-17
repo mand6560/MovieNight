@@ -14,25 +14,31 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imdbButton: UIButton!
     @IBOutlet weak var watchlistButton: UIButton!
     @IBOutlet weak var favouriteButton: UIButton!
+    @IBOutlet weak var actorsLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var ratedLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var releaseLabel: UILabel!
+    @IBOutlet weak var directorLabel: UILabel!
     
     
     private var currentResult: Result?
     private var movieID: String?
     
-    var movieTitle:  String? //
-    var year:        String? //
-    var rated:       String? //
-    var released:    String? //
-    var runtime:     String? // maybe
+    var movieTitle:  String? // done
+    var year:        String? // done
+    var rated:       String? // done
+    var released:    String? // done
+    var runtime:     String? // done
     var genre:       String?
-    var director:    String? //
+    var director:    String? // done
     var writer:      String?
-    var actors:      String? //
-    var synopsis:    String? //
+    var actors:      String? // done
+    var synopsis:    String? // done
     var language:    String?
     var country:     String?
     var awards:      String?
-    var poster:      String? //
+    var poster:      String? // done
     var ratings:     Array<Any>?
     
     
@@ -41,7 +47,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imdbButton.layer.cornerRadius = 5
+        imdbButton.layer.cornerRadius = 10
         self.title = currentResult!.getTitle()
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
@@ -78,6 +84,12 @@ class DetailViewController: UIViewController {
                     poster = (object["Poster"] as! String)
                     ratings = (object["Ratings"] as! Array<Any>)
                     descriptionLabel.text = synopsis
+                    actorsLabel.text = actors
+                    runtimeLabel.text = runtime
+                    ratedLabel.text = rated
+                    yearLabel.text = year
+                    releaseLabel.text = released
+                    directorLabel.text = director
                 } else {
                     print("JSON is invalid")
                 }
