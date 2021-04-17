@@ -77,6 +77,15 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let action = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
+                self?.addToFavourites(indexPath: indexPath)
+                completionHandler(true)
+            }
+            action.backgroundColor = .systemGreen
+            return UISwipeActionsConfiguration(actions: [action])
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as! DetailViewController
         let selectedResultCell = sender as! UITableViewCell
@@ -184,5 +193,21 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }))
 
         present(favouritesAlert, animated: true, completion: nil)
+    }
+    
+    private func addToFavourites(indexPath: IndexPath) {
+        let selectedRow = fetchedResultsController.object(at: indexPath) as! Watchlist
+        let result = Favourites.makeFavourites(actors: selectedRow.actors!, director: selectedRow.director!, poster: selectedRow.poster!, rated: selectedRow.rated!, released: selectedRow.released!, runtime: selectedRow.runtime!, synopsis: selectedRow.synopsis!, title: selectedRow.title!, year: selectedRow.year!, imdbID: selectedRow.imdbID!)
+        print("Added to favourites: \(result)")
+        do {
+            try self.context.save()
+            print("SAVED")
+        } catch let error as NSError {
+            print("\(error)")
+        }
+        
+        let alert = UIAlertController(title: "Added to Favourites", message: "You added this movie/show to your favourites!", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
