@@ -73,7 +73,9 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         default:break
             
         }
-    }//commitEditingStyle
+    }
+    
+    // MARK: - FetchedResult
     
     func initializeFetchedResultsController() {
         //  formulate a request
@@ -110,6 +112,38 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             print("FETCH")
         } catch {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+    }
+    
+    // MARK: - FetchedResultControllerDelegate
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        watchListTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        watchListTableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            watchListTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
+        case .delete:
+            watchListTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            watchListTableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            watchListTableView.deleteRows(at: [indexPath!], with: .automatic)
+        default:
+            break
         }
     }
 }
