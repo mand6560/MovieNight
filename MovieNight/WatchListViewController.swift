@@ -206,7 +206,10 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             print("\(error)")
         }
         
-        let alert = UIAlertController(title: "Added to Favourites", message: "You added this movie/show to your favourites!", preferredStyle: UIAlertController.Style.alert)
+        let alertTitle = result ? "Added to Favourites" : "Already favourited!"
+        let alertMessage = result ? "You added this movie or show to your favourites!" : "This movie or show is already in your favourites"
+        
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
