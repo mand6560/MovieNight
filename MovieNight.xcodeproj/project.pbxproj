@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D901726262A487900239D78 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901725262A487900239D78 /* DetailViewController.swift */; };
 		5DC51AA92624EE3100BC6583 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC51AA82624EE3100BC6583 /* Result.swift */; };
 		CDB3F5952624DCC500286D9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F5942624DCC500286D9E /* AppDelegate.swift */; };
 		CDB3F5972624DCC500286D9E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F5962624DCC500286D9E /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D901725262A487900239D78 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5DC51AA82624EE3100BC6583 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		CDB3F5912624DCC500286D9E /* MovieNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB3F5942624DCC500286D9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				CDB3F5A52624DCC500286D9E /* Info.plist */,
 				CDB3F59D2624DCC500286D9E /* MovieNight.xcdatamodeld */,
 				5DC51AA82624EE3100BC6583 /* Result.swift */,
+				5D901725262A487900239D78 /* DetailViewController.swift */,
 			);
 			path = MovieNight;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D901726262A487900239D78 /* DetailViewController.swift in Sources */,
 				CDB3F5B12624E56700286D9E /* SearchViewController.swift in Sources */,
 				CDB3F59F2624DCC500286D9E /* MovieNight.xcdatamodeld in Sources */,
 				CDB3F5952624DCC500286D9E /* AppDelegate.swift in Sources */,

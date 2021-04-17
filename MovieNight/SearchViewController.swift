@@ -29,6 +29,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailVC = segue.destination as! DetailViewController
+        let selectedResultCell = sender as! UITableViewCell
+        let indexPath = myTableView.indexPath(for: selectedResultCell)
+        let selectedResult = mediaList[indexPath!.row]
+        detailVC.setCurrentResult(to: selectedResult)
+    }
+    
     // MARK: - TableView delgates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mediaList.count
