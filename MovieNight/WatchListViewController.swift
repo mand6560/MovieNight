@@ -53,7 +53,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "watchlist-cell")
         let obj = fetchedResultsController.object(at: indexPath) as! Watchlist
         cell?.textLabel?.text = obj.title
-        print(obj.title!)
+        //print(obj.title!)
         print("INSERT")
         return cell!
     }
