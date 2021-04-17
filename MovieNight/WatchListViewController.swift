@@ -144,8 +144,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         case .insert:
             watchListTableView.insertRows(at: [newIndexPath!], with: .automatic)
         case .delete:
-            let obj = fetchedResultsController.object(at: indexPath!) as! Watchlist
-            presentFavouritesAlert(obj: obj)
+            presentFavouritesAlert(obj: anObject as! Watchlist)
             watchListTableView.deleteRows(at: [indexPath!], with: .automatic)
             print("deleted!")
         default:
