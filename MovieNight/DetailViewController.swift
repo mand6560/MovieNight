@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
     
     private var currentResult: Result?
     private var movieID: String?
+    private var sender: Int?
     
     var movieTitle:  String? // done
     var year:        String? // done
@@ -71,8 +72,17 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func setCurrentResult(to result: Result){
+    override func viewDidDisappear(_ animated: Bool) {
+        if (sender == 1){
+            self.performSegue(withIdentifier: "gotoWatch", sender: self)
+        } else if (sender == 2) {
+            self.performSegue(withIdentifier: "gotoFavourites", sender: self)
+        }
+    }
+    
+    func setCurrentResult(to result: Result, sender: Int){
         self.currentResult = result
+        self.sender = sender
     }
     
     func getMovieData() {

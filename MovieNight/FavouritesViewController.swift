@@ -87,7 +87,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         let indexPath = favouriteListTableView.indexPath(for: selectedResultCell)
         let selectedResult = fetchedResultsController.object(at: indexPath!) as! Favourites
         
-        detailVC.setCurrentResult(to: Favourites.getResultByTitle(title: selectedResult.title!)!)
+        detailVC.setCurrentResult(to: Favourites.getResultByTitle(title: selectedResult.title!)!, sender: 2)
     }
     
     // MARK: - FetchedResult
@@ -206,6 +206,9 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func unwindToFavourites(unwindSegue: UIStoryboardSegue){
+        
+    }
 
     /*
     // MARK: - Navigation

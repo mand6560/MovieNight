@@ -37,7 +37,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="4CA-gN-vs7" kind="show" id="Gc5-Aw-yz4"/>
+                                            <segue destination="4CA-gN-vs7" kind="show" identifier="" id="Gc5-Aw-yz4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -58,6 +58,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ScA-Bc-eOH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="vJc-oq-FsK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1297.1014492753625" y="1059.375"/>
         </scene>
@@ -111,6 +112,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inR-L4-S8O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="2Fy-wX-Jmz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1295.6521739130435" y="247.76785714285714"/>
         </scene>
@@ -371,6 +373,8 @@
                         <outlet property="runtimeLabel" destination="pIK-mI-wFO" id="b7a-KE-KtN"/>
                         <outlet property="watchlistButton" destination="WkL-RN-Md7" id="toI-XJ-to6"/>
                         <outlet property="yearLabel" destination="ZUu-Is-2r1" id="nK2-Qr-nh5"/>
+                        <segue destination="2Fy-wX-Jmz" kind="unwind" identifier="gotoWatch" unwindAction="unwindToWatchWithUnwindSegue:" id="v3T-MO-N8c"/>
+                        <segue destination="vJc-oq-FsK" kind="unwind" identifier="gotoFavourites" unwindAction="unwindToFavouritesWithUnwindSegue:" id="2Ko-T5-DDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UlM-es-qcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

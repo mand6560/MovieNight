@@ -92,7 +92,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         let indexPath = watchListTableView.indexPath(for: selectedResultCell)
         let selectedResult = fetchedResultsController.object(at: indexPath!) as! Watchlist
         
-        detailVC.setCurrentResult(to: Watchlist.getResultByTitle(title: selectedResult.title!)!)
+        detailVC.setCurrentResult(to: Watchlist.getResultByTitle(title: selectedResult.title!)!, sender: 1)
     }
     
     // MARK: - FetchedResult
@@ -215,5 +215,9 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindToWatch(unwindSegue: UIStoryboardSegue){
+        
     }
 }
