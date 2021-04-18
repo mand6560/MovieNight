@@ -69,6 +69,17 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
+            watchlistButton.setTitle("Watchlisted", for: .normal)
+            watchlistButton.isEnabled = false
+        }
+        if (Favourites.favouritesExists(with: currentResult!.getTitle()) == true){
+            favouriteButton.setTitle("Favourited", for: .normal)
+            favouriteButton.isEnabled = false
+        }
+    }
+    
     func setCurrentResult(to result: Result){
         self.currentResult = result
     }
