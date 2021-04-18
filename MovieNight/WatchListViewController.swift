@@ -86,6 +86,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             return UISwipeActionsConfiguration(actions: [action])
     }
     
+    // Prepare for segue to detail view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as! DetailViewController
         let selectedResultCell = sender as! UITableViewCell
@@ -157,6 +158,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // If user swipes on row, ask if they want to delete an item
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
@@ -176,6 +178,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // Present an alert asking if user wants to add movie/show to favourites
     func presentFavouritesAlert(obj: Result) {
         let favouritesAlert = UIAlertController(title: "Add to favourites", message: "Would you like to add this movie/show to your favourites?", preferredStyle: UIAlertController.Style.alert)
 
@@ -198,6 +201,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         present(favouritesAlert, animated: true, completion: nil)
     }
     
+    // Add movie/show to favourites
     private func addToFavourites(indexPath: IndexPath) {
         let selectedRow = fetchedResultsController.object(at: indexPath) as! Watchlist
         let result = Favourites.makeFavourites(actors: selectedRow.actors!, director: selectedRow.director!, poster: selectedRow.poster!, rated: selectedRow.rated!, released: selectedRow.released!, runtime: selectedRow.runtime!, synopsis: selectedRow.synopsis!, title: selectedRow.title!, year: selectedRow.year!, imdbID: selectedRow.imdbID!)
@@ -217,6 +221,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.present(alert, animated: true, completion: nil)
     }
     
+    // Unwind from detail view controller
     @IBAction func unwindToWatch(unwindSegue: UIStoryboardSegue){
         
     }

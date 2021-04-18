@@ -29,6 +29,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    // Prepare for a segue to detailviewcontroller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as! DetailViewController
         let selectedResultCell = sender as! UITableViewCell
@@ -69,6 +70,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchSearchResults(searchQuery: searchBar.text!)
     }
     
+    // Make a request to the OMDB api
     func fetchSearchResults(searchQuery: String) {
         do {
             let searchQuery = searchQuery.replacingOccurrences(of: " ", with: "+")
@@ -79,6 +81,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if let object = json as? [String: Any] {
                     let response = object["Response"] as! String
                     
+                    // Check if no results from response
                     if response == "False" {
                         print("No results")
                         let alertTitle = "No results!"
@@ -87,10 +90,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
+                    // Otherwise, get results of query
                     } else {
                         let searchResultsObject = object["Search"] as! Array<Any>
-                        //print(response)
-                        //print(search)
+                        // Populate the tableview with results
                         for resultObject in searchResultsObject {
                             if let result = resultObject as? [String: Any] {
                                 let newResult = Result(title: result["Title"] as! String, year: result["Year"] as! String, imdbID: result["imdbID"] as! String, mediaType: result["Type"] as! String, poster: nil)

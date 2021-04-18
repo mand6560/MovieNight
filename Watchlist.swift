@@ -13,6 +13,7 @@ import UIKit
 @objc(Watchlist)
 public class Watchlist: NSManagedObject {
     
+    // Create new entry for Watchlist if it doesn't already exist
     class func makeWatchlist(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) -> Bool {
         let context = AppDelegate.viewContext
         if !Watchlist.watchlistExists(with: title) {
@@ -23,6 +24,7 @@ public class Watchlist: NSManagedObject {
         return false
     }
     
+    // Check if entry already exists in Watchlist
     class func watchlistExists(with title: String) -> Bool {
         let request: NSFetchRequest<Watchlist> = Watchlist.fetchRequest()
         request.predicate = NSPredicate(format: "title = %@", title)
@@ -35,6 +37,7 @@ public class Watchlist: NSManagedObject {
         }
     }
     
+    // Set new entry in Watchlist
     func set(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) {
         self.actors = actors
         self.director = director
@@ -48,6 +51,7 @@ public class Watchlist: NSManagedObject {
         self.imdbID = imdbID
     }
     
+    // Get the information about a movie/show by its title
     class func getResultByTitle(title: String) -> Result?{
         let request: NSFetchRequest<Watchlist> = Watchlist.fetchRequest()
         request.predicate = NSPredicate(format: "title = %@", title)

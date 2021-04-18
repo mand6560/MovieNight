@@ -60,10 +60,10 @@
 		CDB3F5882624DCC500286D9E = {
 			isa = PBXGroup;
 			children = (
-				5DDDB318262A8DF000B9D6E9 /* Watchlist.swift */,
-				5DDDB319262A8DF000B9D6E9 /* Watchlist+CoreDataProperties.swift */,
 				5DDDB31A262A8DF000B9D6E9 /* Favourites.swift */,
 				5DDDB31B262A8DF000B9D6E9 /* Favourites+CoreDataProperties.swift */,
+				5DDDB318262A8DF000B9D6E9 /* Watchlist.swift */,
+				5DDDB319262A8DF000B9D6E9 /* Watchlist+CoreDataProperties.swift */,
 				CDB3F5932624DCC500286D9E /* MovieNight */,
 				CDB3F5922624DCC500286D9E /* Products */,
 			);
@@ -81,18 +81,18 @@
 			isa = PBXGroup;
 			children = (
 				CDB3F5942624DCC500286D9E /* AppDelegate.swift */,
-				CDB3F5962624DCC500286D9E /* SceneDelegate.swift */,
+				CDB3F5A02624DCC500286D9E /* Assets.xcassets */,
+				5D901725262A487900239D78 /* DetailViewController.swift */,
+				CDB3F5B62624E58F00286D9E /* FavouritesViewController.swift */,
+				CDB3F5A52624DCC500286D9E /* Info.plist */,
+				CDB3F5A22624DCC500286D9E /* LaunchScreen.storyboard */,
 				CDB3F59A2624DCC500286D9E /* Main.storyboard */,
 				CDB3F5AD2624E2AF00286D9E /* MainViewController.swift */,
+				CDB3F59D2624DCC500286D9E /* MovieNight.xcdatamodeld */,
+				5DC51AA82624EE3100BC6583 /* Result.swift */,
+				CDB3F5962624DCC500286D9E /* SceneDelegate.swift */,
 				CDB3F5B02624E56700286D9E /* SearchViewController.swift */,
 				CDB3F5B32624E57A00286D9E /* WatchListViewController.swift */,
-				CDB3F5B62624E58F00286D9E /* FavouritesViewController.swift */,
-				5D901725262A487900239D78 /* DetailViewController.swift */,
-				5DC51AA82624EE3100BC6583 /* Result.swift */,
-				CDB3F5A02624DCC500286D9E /* Assets.xcassets */,
-				CDB3F5A22624DCC500286D9E /* LaunchScreen.storyboard */,
-				CDB3F5A52624DCC500286D9E /* Info.plist */,
-				CDB3F59D2624DCC500286D9E /* MovieNight.xcdatamodeld */,
 			);
 			path = MovieNight;
 			sourceTree = "<group>";

@@ -13,6 +13,7 @@ import UIKit
 @objc(Favourites)
 public class Favourites: NSManagedObject {
     
+    // Create new entry in Favourites if it doesn't exist
     class func makeFavourites(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) -> Bool {
         let context = AppDelegate.viewContext
         if !Favourites.favouritesExists(with: title) {
@@ -23,6 +24,7 @@ public class Favourites: NSManagedObject {
         return false
     }
     
+    // Check if entry is already in favourites
     class func favouritesExists(with title: String) -> Bool {
         let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
         request.predicate = NSPredicate(format: "title = %@", title)
@@ -34,7 +36,8 @@ public class Favourites: NSManagedObject {
             return true
         }
     }
-
+    
+    // Set new favourites entry
     func set(actors: String, director: String, poster: Data, rated: String, released: String, runtime: String, synopsis: String, title: String, year: String, imdbID: String) {
         self.actors = actors
         self.director = director
@@ -48,6 +51,7 @@ public class Favourites: NSManagedObject {
         self.imdbID = imdbID
     }
     
+    // Get data about a movie/show by title
     class func getResultByTitle(title: String) -> Result?{
         let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
         request.predicate = NSPredicate(format: "title = %@", title)

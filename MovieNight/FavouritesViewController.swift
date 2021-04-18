@@ -22,6 +22,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         favouriteListTableView.dataSource = self
     }
     
+    // Update the table view data
     override func viewDidAppear(_ animated: Bool) {
         initializeFetchedResultsController()
         favouriteListTableView.reloadData()
@@ -72,6 +73,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    // Prepare for segue to detail view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as! DetailViewController
         let selectedResultCell = sender as! UITableViewCell
@@ -83,6 +85,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - FetchedResult
     
+    // Initialize the fetch of core data
     func initializeFetchedResultsController() {
         //  formulate a request
         let request : NSFetchRequest<Favourites> = Favourites.fetchRequest()
