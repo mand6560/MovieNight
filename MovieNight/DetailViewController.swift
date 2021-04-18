@@ -59,6 +59,10 @@ class DetailViewController: UIViewController {
             watchlistButton.setTitle("Watchlisted", for: .normal)
             watchlistButton.isEnabled = false
         }
+        if (Favourites.favouritesExists(with: currentResult!.getTitle()) == true){
+            favouriteButton.setTitle("Favourited", for: .normal)
+            favouriteButton.isEnabled = false
+        }
         
         getMovieData()
 
@@ -130,6 +134,20 @@ class DetailViewController: UIViewController {
     
     @IBAction func favouriteButtonClicked(_ sender: Any) {
         print("add to favourites")
+        let temp = Favourites.makeFavourites(actors: self.actors!, director: self.director!, poster: self.currentResult!.getPoster()!.pngData()!, rated: self.rated!, released: self.released!, runtime: self.runtime!, synopsis: self.synopsis!, title: self.movieTitle!, year: self.year!, imdbID: self.imdbID!)
+        if (temp == true){
+            favouriteButton.setTitle("Favourited", for: .normal)
+            favouriteButton.isEnabled = false
+        }else{
+            print("Already exists")
+        }
+        do {
+            try context.save()
+            print("SAVED")
+        } catch let error as NSError {
+            print("\(error)")
+        }
+        
     }
     
     @IBAction func imdbButtonClicked(_ sender: Any) {
