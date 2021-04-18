@@ -55,7 +55,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         cell?.textLabel?.text = mediaList[indexPath.row].getTitle()
         
-        return cell! //MARK: Change Later
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -77,31 +77,42 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let data = try Data(contentsOf: url)
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let object = json as? [String: Any] {
-                    //let response = object["Response"] as! String
-                    let searchResultsObject = object["Search"] as! Array<Any>
-                    //print(response)
-                    //print(search)
-                    for resultObject in searchResultsObject {
-                        if let result = resultObject as? [String: Any] {
-                            let newResult = Result(title: result["Title"] as! String, year: result["Year"] as! String, imdbID: result["imdbID"] as! String, mediaType: result["Type"] as! String, poster: nil)
-                            
-                            let imageURLString = result["Poster"] as! String
-                            var posterImage: UIImage?
-                            
-                            if (imageURLString == "N/A") {
-                                posterImage = UIImage(systemName: "photo")
-                            } else {
-                                let imageURL = URL(string: result["Poster"] as! String)!
-                                let imageData = try Data(contentsOf: imageURL)
-                                posterImage = UIImage(data: imageData)
+                    let response = object["Response"] as! String
+                    
+                    if response == "False" {
+                        print("No results")
+                        let alertTitle = "No results!"
+                        let alertMessage = "No movies or shows found for your search query, add more characters to it and try again"
+                        
+                        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        let searchResultsObject = object["Search"] as! Array<Any>
+                        //print(response)
+                        //print(search)
+                        for resultObject in searchResultsObject {
+                            if let result = resultObject as? [String: Any] {
+                                let newResult = Result(title: result["Title"] as! String, year: result["Year"] as! String, imdbID: result["imdbID"] as! String, mediaType: result["Type"] as! String, poster: nil)
+                                
+                                let imageURLString = result["Poster"] as! String
+                                var posterImage: UIImage?
+                                
+                                if (imageURLString == "N/A") {
+                                    posterImage = UIImage(systemName: "photo")
+                                } else {
+                                    let imageURL = URL(string: result["Poster"] as! String)!
+                                    let imageData = try Data(contentsOf: imageURL)
+                                    posterImage = UIImage(data: imageData)
+                                }
+                                
+                                newResult.setPoster(img: posterImage)
+                                mediaList.append(newResult)
                             }
-                            
-                            newResult.setPoster(img: posterImage)
-                            mediaList.append(newResult)
                         }
                     }
                 } else {
-                print("JSON is invalid")
+                    fatalError()
                 }
             } else {
                 fatalError()
@@ -111,15 +122,5 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         myTableView.reloadData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
