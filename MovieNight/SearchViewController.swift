@@ -34,7 +34,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let selectedResultCell = sender as! UITableViewCell
         let indexPath = myTableView.indexPath(for: selectedResultCell)
         let selectedResult = mediaList[indexPath!.row]
-        detailVC.setCurrentResult(to: selectedResult)
+        detailVC.setCurrentResult(to: selectedResult, sender: 0)
     }
     
     // MARK: - TableView delgates
@@ -122,5 +122,4 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         myTableView.reloadData()
     }
-
 }

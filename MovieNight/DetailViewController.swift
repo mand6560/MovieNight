@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
     
     private var currentResult: Result?
     private var movieID: String?
+    private var sender: Int?
     
     var movieTitle:  String? // done
     var year:        String? // done
@@ -54,7 +55,13 @@ class DetailViewController: UIViewController {
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
         imdbID = movieID
-        // watchlist = Watchlist(context: context)
+
+        getMovieData()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
             watchlistButton.setTitle("Watchlisted", for: .normal)
             watchlistButton.isEnabled = false
@@ -63,14 +70,19 @@ class DetailViewController: UIViewController {
             favouriteButton.setTitle("Favourited", for: .normal)
             favouriteButton.isEnabled = false
         }
-        
-        getMovieData()
-
-        // Do any additional setup after loading the view.
     }
     
-    func setCurrentResult(to result: Result){
+    override func viewDidDisappear(_ animated: Bool) {
+        if (sender == 1){
+            self.performSegue(withIdentifier: "gotoWatch", sender: self)
+        } else if (sender == 2) {
+            self.performSegue(withIdentifier: "gotoFavourites", sender: self)
+        }
+    }
+    
+    func setCurrentResult(to result: Result, sender: Int){
         self.currentResult = result
+        self.sender = sender
     }
     
     func getMovieData() {
