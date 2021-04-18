@@ -54,16 +54,7 @@ class DetailViewController: UIViewController {
         movieImg.image = currentResult!.getPoster()
         movieID = currentResult!.getImdbID()
         imdbID = movieID
-        // watchlist = Watchlist(context: context)
-        if (Watchlist.watchlistExists(with: currentResult!.getTitle()) == true){
-            watchlistButton.setTitle("Watchlisted", for: .normal)
-            watchlistButton.isEnabled = false
-        }
-        if (Favourites.favouritesExists(with: currentResult!.getTitle()) == true){
-            favouriteButton.setTitle("Favourited", for: .normal)
-            favouriteButton.isEnabled = false
-        }
-        
+
         getMovieData()
 
         // Do any additional setup after loading the view.
