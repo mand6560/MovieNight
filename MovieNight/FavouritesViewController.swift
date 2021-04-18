@@ -137,7 +137,6 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             favouriteListTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
         case .delete:
             favouriteListTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .automatic)
-            // print("deleted!")
         default:
             break
         }
